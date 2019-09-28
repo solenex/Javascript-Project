@@ -1,12 +1,11 @@
 // From data.js
 var tableData = data;
 
-
 var tbody = d3.select("tbody");
 
 // First, We populate the table
 function populateTable(data) {
-    
+    tbody.html("");
     // Loop through each object in tableData 
     data.forEach((tableObject) => {
       // Add a row to the table 
@@ -25,7 +24,8 @@ function populateTable(data) {
     // Make sure people can click
 function handleClick() {
     // Prevent the form from refreshing the page
-    d3.event.preventDefault();
+
+    // d3.event.preventDefault();
     // select the date and the time
     var date = d3.select("#datetime").property("value");
     // Reassign filtered data as tabledata 
@@ -36,8 +36,9 @@ function handleClick() {
       DatabyDate = DatabyDate.filter(row => row.datetime === date);
     }
     // Populate the new table with corresponding info
-    buildTable(DatabyDate);
+    populateTable(DatabyDate);
   }
+
   
   // Add an event listener when people click on the form button
   d3.selectAll("#filter-btn").on("click", handleClick);
